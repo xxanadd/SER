@@ -9,14 +9,14 @@ import keras
 from keras.models import model_from_json
 from concurrent.futures import ThreadPoolExecutor
 
-emotion_list = ['negative', 'neutral', 'positive']
+emotion_list = ['angry', 'calm', 'happy', 'sad']
 
 # Загрузка модели
-json_file = open('model.json', 'r')
+json_file = open('my_model_uniform_4.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
-loaded_model.load_weights("model/my_model.keras")
+loaded_model.load_weights("model/my_model_uniform_4.keras")
 print("Loaded model from disk")
 
 opt = keras.optimizers.SGD(learning_rate=0.0001, momentum=0.0, nesterov=False)
@@ -58,9 +58,9 @@ def calculate_emotion(path, total_columns=259):
     preds1 = preds.argmax(axis=1)
     print()
     print(preds)
-    print('negative', 'neutral', 'positive')
-    print(preds1)
-    print()
+    # print(emotion_list)
+    # print(preds1)
+    # print()
     print(emotion_list[preds1[0]])
 
 
